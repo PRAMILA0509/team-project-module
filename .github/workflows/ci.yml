@@ -1,0 +1,37 @@
+name: Demo CI Workflow
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  fake-build:
+    runs-on: ubuntu-latest
+
+    steps:
+     
+      - uses: actions/checkout@v3
+
+     
+      - name: Simulate Build
+        run: |
+          echo "This is a demo build for hackathon"
+          sleep 5
+          echo "Build complete!"
+
+    
+      - name: Simulate Success/Failure
+        run: |
+          if [ $((RANDOM % 2)) -eq 0 ]; then
+            echo "Build succeeded"
+            exit 0
+          else
+            echo "Build failed"
+            exit 1
+          fi
